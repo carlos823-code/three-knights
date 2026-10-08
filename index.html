@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>三騎士的征途・第1回｜跑Online</title>
+<style>
+:root{--navy:#101a2e;--navy2:#182844;--panel:#f5f1ee;--ink:#382f2b;--muted:#887b75;--red:#b96852;--red2:#d8896d;--gold:#d7a33d;--blue:#3c86c8;--line:#e4d8d2;--white:#fff;--green:#4e9b76}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,"Noto Sans TC","Microsoft JhengHei",sans-serif;color:var(--ink);background:radial-gradient(circle at 15% 5%,#304a70 0,transparent 25%),radial-gradient(circle at 90% 15%,#513f48 0,transparent 28%),linear-gradient(145deg,#0b1425,#17263f 55%,#10192b);min-height:100vh}
+.stars{position:fixed;inset:0;pointer-events:none;opacity:.28;background-image:radial-gradient(#fff 1px,transparent 1px);background-size:43px 43px;mask-image:linear-gradient(to bottom,#fff,transparent 75%)}
+.wrap{max-width:1240px;margin:auto;padding:28px 28px 42px;position:relative}
+.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:26px}
+.brand{font-weight:1000;font-size:42px;letter-spacing:-2px;color:#f0c65c;text-shadow:0 3px 0 #79571b,0 0 18px #f0c65c55;font-style:italic}
+.hero h1{margin:0;color:#fff;font-size:36px;line-height:1.1}.hero p{margin:6px 0 0;color:#b7c6dc;font-size:15px}
+.actions{display:flex;gap:10px;align-items:center}.date{color:#e9f0fb;font-weight:700;font-size:14px;padding:10px 14px;border:1px solid #425a7d;border-radius:12px;background:#172b4b}
+.btn{border:0;border-radius:12px;padding:10px 14px;font-weight:800;cursor:pointer}.reset{background:#573d3a;color:#ffe9df}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:20px}
+.stat{background:linear-gradient(150deg,#1c3457,#142846);border:1px solid #365273;border-radius:18px;padding:19px 21px;box-shadow:0 15px 35px #0003}.stat .label{color:#aabbd3;font-weight:800;font-size:13px}.stat .num{color:#fff;font-size:32px;font-weight:1000;margin:5px 0}.stat .sub{color:#91a8c7;font-size:12px}.stat .num.gold{color:#f4cb61}.stat .num.red{color:#e49378}
+.datebar{display:flex;align-items:center;justify-content:space-between;gap:18px;margin:0 0 20px;padding:13px 16px;background:#152a49;border:1px solid #385678;border-radius:16px}
+.datebar strong{display:block;color:#e9f3ff;font-size:14px}.datebar span{display:block;color:#8fa9cb;font-size:11px;margin-top:3px}
+.datepick{display:flex;gap:7px;align-items:center}.datepick input{background:#0c1e37;border:1px solid #405e81;color:#e5eefb;border-radius:9px;padding:9px 10px;font-weight:800}.navbtn{width:36px;height:36px;border:1px solid #405e81;background:#213b60;color:#e5eefb;border-radius:10px;font-size:20px;cursor:pointer}.loadtoday{background:#213b60;color:#e5eefb;border:1px solid #405e81}
+.main{background:var(--panel);border-radius:24px;box-shadow:0 25px 70px #0005;overflow:hidden}
+.panelhead{padding:23px 25px 17px;display:flex;align-items:end;justify-content:space-between}.panelhead h2{margin:0;font-size:22px}.panelhead span{font-size:13px;color:var(--muted)}
+.tablehead,.row{display:grid;grid-template-columns:2.35fr 1.7fr .95fr 1.4fr;align-items:center}.tablehead{padding:11px 25px;color:#8b7e78;font-size:12px;font-weight:900;background:#ebe1dc;text-transform:uppercase}
+.row{padding:16px 25px;border-top:1px solid var(--line);min-height:100px}.task{display:flex;align-items:center;gap:13px}.icon{width:45px;height:45px;border-radius:14px;display:grid;place-items:center;background:#f0e3de;font-size:23px}.badge{display:inline-block;padding:3px 8px;border-radius:7px;font-size:10px;font-weight:1000;color:var(--red);background:#fff;border:1px solid #dfb8ab;margin-bottom:4px}.badge.active{color:#fff;background:var(--red);border-color:var(--red)}.badge.get{color:#765a42;background:#fff;border-color:#d7c3ae}.badge.get.active{color:#fff;background:#86664b;border-color:#86664b}.taskname{font-size:15px;font-weight:950}.rule{font-size:11px;color:#8c817b;margin-top:3px}.progress{padding-right:18px}.bar{height:9px;background:#e1d8d3;border-radius:20px;overflow:hidden}.fill{height:100%;background:linear-gradient(90deg,#b96852,#df9275);border-radius:20px}.ptext{display:flex;justify-content:space-between;margin-top:7px;font-size:12px;color:#756a65}.score{font-size:25px;font-weight:1000;color:#9e5744}.score small{font-size:11px;color:#8e817a;font-weight:800}.controls{display:flex;justify-content:flex-end;align-items:center;gap:8px}.ctrl{width:52px;height:36px;border:1px solid #d2c5bf;background:#fff;border-radius:10px;cursor:pointer;font-weight:1000;color:#5a514d;font-size:13px}.count{min-width:64px;text-align:center;font-weight:950;color:#382f2b;white-space:nowrap}.unit{font-size:11px;color:#8b807a}
+.bottom{display:grid;grid-template-columns:1.45fr 1fr 1fr;gap:16px;padding:18px 25px 25px;background:#eee7e3}.card{background:#fff;border:1px solid #dfd4cf;border-radius:17px;padding:18px}.card h3{margin:0 0 14px;font-size:15px}.chart{height:145px;display:flex;align-items:end;gap:8px;padding-top:10px}.day{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:end}.barc{width:100%;max-width:28px;border-radius:7px 7px 3px 3px;background:linear-gradient(#df9275,#a95643);min-height:4px}.day label{font-size:9px;color:#928680}.day b{font-size:10px;color:#665b56}.detail{display:flex;justify-content:space-between;border-bottom:1px solid #eee7e3;padding:9px 0;font-size:13px}.detail:last-child{border:0}.detail b{font-size:16px}.rules{font-size:12px;color:#6d625d;line-height:1.8}.rules strong{color:#443b37}
+.reward-layout{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:stretch;margin-top:20px}.reward-card{background:#f5f1ee;border:1px solid #ded2cc;border-radius:24px;box-shadow:0 22px 60px #0004;overflow:hidden;display:flex;flex-direction:column}
+.reward-title{padding:20px 20px 5px;font-size:20px;font-weight:1000;color:#3b302b}.reward-sub{padding:0 20px 15px;color:#80736d;font-size:12px;line-height:1.6}.season-list{padding:0 16px 18px;display:grid;gap:12px}
+.daily-reward{background:linear-gradient(135deg,#fff7dc,#fff);border:1px solid #e7d39a;border-radius:16px;padding:15px;display:flex;align-items:center;justify-content:space-between;gap:15px}.daily-reward .reward-title{padding:0;font-size:17px}.daily-reward .reward-sub{padding:3px 0 0}.daily-box{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid #ecdcae;border-radius:14px;padding:9px 12px;min-width:230px}.coin{width:54px;height:54px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(145deg,#f6c54c,#d9932d);font-size:28px;box-shadow:inset 0 0 0 3px #fff6}
+.daily-box strong{display:block;color:#7a5310;font-size:14px}.daily-box span{display:block;color:#9b875f;font-size:11px;margin-top:3px}
+.season-block{background:#fff;border:1px solid #dfd4cf;border-radius:16px;overflow:hidden}.season-head{padding:11px 14px;background:linear-gradient(90deg,#eee2dd,#fbf8f6);display:flex;align-items:center;justify-content:space-between}.season-name{font-weight:1000;font-size:15px;color:#51433d}.season-note{font-size:11px;color:#8a7d76}.season-items{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:12px}.season-item{border:1px solid #e4dad5;border-radius:13px;padding:10px;background:#fff;text-align:center;min-height:132px}.season-item.done{border-color:#c87b66;box-shadow:0 0 0 2px #f2d9d1 inset}.reward-day{display:inline-block;background:#f1ddd7;color:#a45743;font-weight:1000;padding:4px 9px;border-radius:999px;font-size:12px;margin-bottom:7px}.season-item.done .reward-day{background:#b96852;color:#fff}.reward-icon{font-size:28px;line-height:1;margin-bottom:7px}.reward-name{font-size:12px;line-height:1.45;font-weight:900;color:#5a4d47;min-height:37px}.season-progress{margin-top:7px;font-size:10px;color:#8d817b}
+.perfect-focus{background:linear-gradient(155deg,#f7f1df 0%,#fff 45%,#f7f4ef 100%);border-color:#cbb483;position:relative}.perfect-focus:before{content:"";position:absolute;inset:0 0 auto 0;height:5px;background:linear-gradient(90deg,#8d6728,#e0bd63,#9d6f2d)}
+.perfect-banner{display:flex;gap:16px;align-items:flex-start;padding:22px 22px 14px}.perfect-badge{width:54px;height:54px;border-radius:16px;display:grid;place-items:center;background:linear-gradient(145deg,#8e6828,#d0a84e);color:#fff;font-size:11px;font-weight:1000;letter-spacing:1px;box-shadow:0 8px 20px #8e682833}.perfect-kicker{font-size:11px;font-weight:1000;color:#94743d;letter-spacing:.08em;margin:1px 0 4px}.perfect-banner h2{margin:0;color:#45382d;font-size:24px}.perfect-banner p{margin:7px 0 0;color:#786b62;font-size:12px;line-height:1.65}
+.perfect-summary{display:grid;grid-template-columns:1fr 1.35fr;gap:12px;padding:0 22px 14px}.perfect-total,.perfect-days{background:#fff;border:1px solid #e3d9c3;border-radius:15px;padding:14px 15px}.perfect-total span,.perfect-days span{display:block;font-size:11px;color:#8b8076;font-weight:800}.perfect-total strong{font-size:35px;line-height:1.1;color:#8d6728;margin-right:5px}.perfect-total em{font-style:normal;font-size:12px;color:#81766c;font-weight:900}.perfect-days strong{display:block;color:#5b4b39;font-size:20px;margin-top:4px}.perfect-progress{height:8px;background:#ebe3d2;border-radius:999px;margin-top:9px;overflow:hidden}.perfect-progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,#d0a84e,#8e6828);border-radius:999px;transition:width .25s ease}.perfect-goal{margin:0 22px 14px;border:1px solid #eadfc5;background:#fbf6e9;color:#75613c;border-radius:12px;padding:10px 12px;font-size:11px;font-weight:900;line-height:1.55}
+.perfect-grid{padding:0 16px 18px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.perfect-item{min-height:150px;text-align:center;background:rgba(255,255,255,.96);border:1px solid #e3dac9;border-radius:15px;padding:12px 10px;display:flex;flex-direction:column;align-items:center}.perfect-item.done{border-color:#b18a43;box-shadow:0 0 0 2px #f1e6ca inset}.perfect-item .reward-day{background:#eee4ce;color:#8b672c}.perfect-item.done .reward-day{background:#8e6828;color:#fff}.perfect-item .reward-icon{font-size:34px}.perfect-item .reward-name{min-height:40px}
+.info-card{margin-top:16px;background:#172b49;border:1px solid #385678;border-radius:16px;padding:16px 18px;color:#dce8f8}.info-card h3{margin:0 0 8px}.info-card p{margin:5px 0;font-size:12px;color:#9eb4d0;line-height:1.7}.settings{margin-top:16px;background:#152a49;border:1px solid #385678;border-radius:16px;padding:15px 18px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}.settings input{background:#0c1e37;border:1px solid #405e81;color:#dce9fb;border-radius:9px;padding:9px 11px}.settings button{background:#213b60;color:#dce9fb;border:1px solid #405e81}.foot{color:#7794b9;text-align:center;font-size:11px;margin-top:15px}
+@media(max-width:900px){.stats{grid-template-columns:1fr 1fr}.datebar{align-items:flex-start;flex-direction:column}.datepick{width:100%;flex-wrap:wrap}.datepick input{flex:1;min-width:160px}.tablehead{display:none}.row{grid-template-columns:1fr;gap:12px}.controls{justify-content:flex-start}.bottom{grid-template-columns:1fr}.reward-layout{grid-template-columns:1fr}.season-items,.perfect-grid{grid-template-columns:1fr 1fr}.top{align-items:flex-start;gap:15px;flex-direction:column}.actions{width:100%;justify-content:space-between}.wrap{padding:18px 12px}.brand{font-size:34px}.hero h1{font-size:30px}}
+@media(max-width:560px){.stats{grid-template-columns:1fr}.season-items,.perfect-grid{grid-template-columns:1fr}.daily-reward{flex-direction:column;align-items:flex-start}.daily-box{width:100%;min-width:0}.perfect-summary{grid-template-columns:1fr}.perfect-banner{flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="stars"></div>
+<div class="wrap">
+<header class="top">
+  <div style="display:flex;gap:20px;align-items:center">
+    <div class="brand">跑Online</div>
+    <div class="hero">
+      <h1 id="title">三騎士的征途</h1>
+      <p id="subtitle">遠征任務追蹤器 ⚔️　｜　第1回</p>
+    </div>
+  </div>
+  <div class="actions"><div class="date" id="date"></div><button class="btn reset" onclick="resetToday()">⟳ 重置今日進度</button></div>
+</header>
+
+<section class="stats">
+  <div class="stat"><div class="label">今日完成遠征任務</div><div class="num gold" id="todayMissions">0 次</div><div class="sub">每日 6 次可取得三騎士金幣 10 個</div></div>
+  <div class="stat"><div class="label">累計遠征任務</div><div class="num" id="totalMissions">0 次</div><div class="sub">所有日期完成數量</div></div>
+  <div class="stat"><div class="label">達成 12 次天數</div><div class="num red" id="twelveDays">0 天</div><div class="sub">初心者遠征獎勵</div></div>
+  <div class="stat"><div class="label">達成 24 次天數</div><div class="num" id="twentyFourDays">0 天</div><div class="sub">上級遠征獎勵</div></div>
+</section>
+
+<div class="datebar">
+  <div><strong>查看／輸入日期</strong><span>可以選擇之前的日期，修改當天遠征任務紀錄</span></div>
+  <div class="datepick">
+    <button class="navbtn" onclick="shiftDate(-1)">‹</button>
+    <input id="dateInput" type="date" onchange="setSelectedDate(this.value)" oninput="setSelectedDate(this.value)">
+    <button class="navbtn" onclick="shiftDate(1)">›</button>
+    <button class="btn loadtoday" onclick="goToday()">📅 回到今天</button>
+  </div>
+</div>
+
+<main class="main">
+  <div class="panelhead">
+    <h2>⚔️ 遠征任務進度</h2>
+    <span>四項參與任務各 1 次；兩項獲得任務每 2 個 = 1 次遠征任務</span>
+  </div>
+  <div class="tablehead"><div>任務</div><div>進度（今日）</div><div>完成數</div><div>操作</div></div>
+  <div id="rows"></div>
+
+  <div class="bottom">
+    <div class="card"><h3>每日遠征任務紀錄（最近 14 天）</h3><div class="chart" id="chart"></div></div>
+    <div class="card">
+      <h3>今日明細</h3>
+      <div class="detail"><span>今日完成任務</span><b id="dMissions">0</b></div>
+      <div class="detail"><span>今日獲得物品數</span><b id="dItems">0</b></div>
+      <div class="detail"><span>達成 6 次</span><b id="dDaily">否</b></div>
+    </div>
+    <div class="card">
+      <h3>活動規則</h3>
+      <div class="rules">
+        <strong>參與類：</strong>每完成 1 次 = 1 個遠征任務。<br>
+        <strong>獲得類：</strong>每獲得 2 個 = 1 個遠征任務。<br>
+        <strong>每日獎勵：</strong>每日完成任意遠征任務 6 次。<br>
+        <strong>活動期間：</strong>10/7 維護後～10/20 23:59。<br>
+        <strong>獎勵刪除：</strong>10/23 19:00 前完成兌換／領取。
+      </div>
+    </div>
+  </div>
+</main>
+
+<section class="reward-layout">
+  <div class="reward-card">
+    <div class="reward-title">🎁 每日／階段遠征獎勵</div>
+    <div class="reward-sub">按照官方活動頁的「完成難度：簡單」條件，自動計算達標天數並標記獎勵。</div>
+    <div class="season-list" id="rewardSections"></div>
+  </div>
+
+  <div class="reward-card perfect-focus">
+    <div class="perfect-banner">
+      <div class="perfect-badge">FINAL</div>
+      <div><div class="perfect-kicker">完成難度：困難</div><h2>🏆 完美遠征獎勵</h2><p>每日完成任意 10 個遠征任務，並累計完成指定數量，即可額外獲得最終獎勵。</p></div>
+    </div>
+    <div class="perfect-summary">
+      <div class="perfect-total"><span>累計遠征任務</span><strong id="perfectTotal">0</strong><em> 次</em></div>
+      <div class="perfect-days"><span>每日 10 次達標天數</span><strong id="perfectDays">0 天</strong><div class="perfect-progress"><i id="perfectBar"></i></div></div>
+    </div>
+    <div class="perfect-goal" id="perfectGoal">正在計算最終獎勵進度…</div>
+    <div class="perfect-grid" id="perfectGrid"></div>
+  </div>
+</section>
+
+<div class="info-card">
+  <h3>📜 官方活動資訊</h3>
+  <p>活動名稱：三騎士的征途・第1回</p>
+  <p>活動時間：10月7日維護後 ～ 10月20日 23:59</p>
+  <p>活動內容：每日結算，完成遠征任務後可取得階段獎勵；遠征任務包含「三騎士頻道：卡美洛競技場」、「卡美洛的訓練」、「亡靈騎士」、「魔書解密」，以及獲得「2026三騎士抽獎板鑰匙」、「願望的祈願」。</p>
+  <p>注意：跑步時間需 20 秒或以上才會計算；完成地圖必須衝線才會計算；APP 中心獲得的任務物品不計入本活動。</p>
+</div>
+
+<div class="settings">
+  <span style="color:#9db5d7;font-weight:800">自訂：</span>
+  <input id="titleIn" placeholder="標題"><input id="subIn" placeholder="副標題">
+  <button class="btn" onclick="saveNames()">儲存</button>
+  <button class="btn" onclick="exportData()">匯出資料</button>
+  <button class="btn" onclick="resetAllProgress()">重置全部進度</button>
+  <button class="btn" onclick="clearAll()">清除全部資料</button>
+</div>
+<div class="foot">資料只儲存在此瀏覽器的 LocalStorage，不會自動上傳。</div>
+</div>
+
+<script>
+const KEY='tr_three_knights_journey_part1_v1';
+const TASKS=[
+{id:'arena',kind:'參與',name:'三騎士頻道：卡美洛競技場',unit:'次',need:1,icon:'🏰',rule:'完成 1 次 = 1 個遠征任務'},
+{id:'training',kind:'參與',name:'三騎士頻道：卡美洛的訓練',unit:'次',need:1,icon:'⚔️',rule:'完成 1 次 = 1 個遠征任務'},
+{id:'undead',kind:'參與',name:'三騎士頻道：亡靈騎士',unit:'次',need:1,icon:'💀',rule:'完成 1 次 = 1 個遠征任務'},
+{id:'book',kind:'參與',name:'三騎士頻道：魔書解密',unit:'次',need:1,icon:'📖',rule:'完成 1 次 = 1 個遠征任務'},
+{id:'key',kind:'獲得',name:'2026三騎士抽獎板鑰匙',unit:'個',need:2,icon:'🗝️',rule:'每 2 個 = 1 個遠征任務'},
+{id:'wish',kind:'獲得',name:'願望的祈願',unit:'個',need:2,icon:'✨',rule:'每 2 個 = 1 個遠征任務'}
+];
+
+const EASY=[
+{name:'初心者遠征獎勵',need:12,items:[
+{days:3,text:'烈焰紅玫瑰箱子 2個',icon:'🌹'},
+{days:6,text:'官方獎勵箱子 1個',icon:'🎁'},
+{days:9,text:'聖言小丑箱子 2個',icon:'🎭'}]},
+{name:'中級者遠征獎勵',need:18,items:[
+{days:4,text:'2026三騎士金幣 60個',icon:'🪙'},
+{days:7,text:'願望的結晶 2個',icon:'💎'},
+{days:10,text:'卡美洛相關箱子 1個',icon:'🎁'}]},
+{name:'上級者遠征獎勵',need:24,items:[
+{days:4,text:'2026三騎士金幣 120個',icon:'🪙'},
+{days:7,text:'微光黎明箱子 2個',icon:'🌟'},
+{days:10,text:'滿溢願望的結晶體 1個',icon:'💠'}]}
+];
+const PERFECT=[
+{score:250,text:'7大罪靈魂福袋 20個',icon:'🔥'},
+{score:300,text:'7美德氣息福袋 5個',icon:'🌈'},
+{score:350,text:'深海之箱 2個',icon:'🌊'}
+];
+
+const localDate=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`};
+const parseDate=s=>{const [y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d)};
+const fmtDate=s=>parseDate(s).toLocaleDateString('zh-Hant-TW',{year:'numeric',month:'long',day:'numeric'});
+let data=JSON.parse(localStorage.getItem(KEY)||'null')||{days:{},title:'三騎士的征途',subtitle:'遠征任務追蹤器 ⚔️　｜　第1回'};
+if(!data.days)data.days={};
+let selectedDate=localDate();
+
+function ensureDay(date=selectedDate){
+ if(!data.days[date])data.days[date]={counts:{}};
+ const d=data.days[date]; if(!d.counts)d.counts={};
+ TASKS.forEach(t=>{if(d.counts[t.id]==null)d.counts[t.id]=0});
+ return d;
+}
+function save(){localStorage.setItem(KEY,JSON.stringify(data))}
+function missionCount(t,c){return Math.floor(c/t.need)}
+function dayMissions(d){return TASKS.reduce((s,t)=>s+missionCount(t,d.counts[t.id]||0),0)}
+function dayItems(d){return (d.counts.key||0)+(d.counts.wish||0)}
+function dailyDays(min){return Object.keys(data.days).filter(k=>dayMissions(ensureDay(k))>=min).length}
+
+function render(){
+ const d=ensureDay(selectedDate), today=dayMissions(d);
+ const total=Object.keys(data.days).reduce((s,k)=>s+dayMissions(ensureDay(k)),0);
+ document.getElementById('date').textContent=fmtDate(selectedDate);
+ document.getElementById('dateInput').value=selectedDate;
+ document.getElementById('title').textContent=data.title;
+ document.getElementById('subtitle').textContent=data.subtitle;
+ document.getElementById('todayMissions').textContent=today+' 次';
+ document.getElementById('totalMissions').textContent=total+' 次';
+ document.getElementById('twelveDays').textContent=dailyDays(12)+' 天';
+ document.getElementById('twentyFourDays').textContent=dailyDays(24)+' 天';
+ document.getElementById('dMissions').textContent=today;
+ document.getElementById('dItems').textContent=dayItems(d);
+ document.getElementById('dDaily').textContent=today>=6?'是':'否';
+
+ document.getElementById('rows').innerHTML=TASKS.map(t=>{
+   const c=d.counts[t.id]||0, done=missionCount(t,c), pct=t.need===1?(c>0?100:0):((c%t.need)/t.need*100);
+   const progress=t.need===1?`${c} ${t.unit}`:`${c} / ${t.need} ${t.unit}`;
+   const hint=t.need===1?(c?'已完成':'尚未完成'):(done?`已完成 ${done} 次 · ${c%t.need?'尚差 '+(t.need-c%t.need)+' 個':'可繼續累計'}`:`還需要 ${t.need-c} ${t.unit}`);
+   return `<div class="row"><div class="task"><div class="icon">${t.icon}</div><div><span class="badge ${t.kind==='獲得'?'get':''} ${c>0?'active':''}">${t.kind}</span><div class="taskname">${t.name}</div><div class="rule">${t.rule}</div></div></div><div class="progress"><div class="bar"><div class="fill" style="width:${pct}%"></div></div><div class="ptext"><span>${progress}</span><span>${hint}</span></div></div><div class="score">${done}<small> 次</small></div><div class="controls"><button class="ctrl" onclick="change('${t.id}',-1)">−1</button><div class="count">${c}<span class="unit"> ${t.unit}</span></div><button class="ctrl" onclick="change('${t.id}',1)">＋1</button></div></div>`;
+ }).join('');
+
+ renderChart(); renderRewards(total);
+ document.getElementById('titleIn').value=data.title; document.getElementById('subIn').value=data.subtitle;
+ save();
+}
+
+function renderChart(){
+ const el=document.getElementById('chart'), base=parseDate(selectedDate); let html='';
+ for(let i=13;i>=0;i--){const d=new Date(base);d.setDate(d.getDate()-i);const k=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;const n=data.days[k]?dayMissions(ensureDay(k)):0;const h=Math.min(100,n/24*100);html+=`<div class="day"><b>${n}</b><div class="barc" style="height:${Math.max(4,h)}%"></div><label>${d.getMonth()+1}/${d.getDate()}</label></div>`}
+ el.innerHTML=html;
+}
+
+function renderRewards(total){
+ const r=document.getElementById('rewardSections');
+ let html=`<div class="daily-reward"><div><div class="reward-title">🪙 每日遠征獎勵</div><div class="reward-sub">每日完成任意遠征任務 6 次，可於隔天 04:00am 獲得。</div></div><div class="daily-box"><div class="coin">🪙</div><div><strong>2026三騎士金幣 10個</strong><span>目前達標 ${dailyDays(6)} 天</span></div></div></div>`;
+ html+=EASY.map(g=>{const dc=dailyDays(g.need);return `<div class="season-block"><div class="season-head"><div class="season-name">${g.name}</div><div class="season-note">每日 ${g.need} 次　｜　目前 ${dc} 天</div></div><div class="season-items">${g.items.map(it=>{const done=dc>=it.days;return `<div class="season-item ${done?'done':''}"><div class="reward-day">${it.days} 天</div><div class="reward-icon">${it.icon}</div><div class="reward-name">${it.text}</div><div class="season-progress">${done?'✅ 已達成':'還差 '+Math.max(0,it.days-dc)+' 天'}</div></div>`}).join('')}</div></div>`}).join('');
+ r.innerHTML=html;
+
+ const pd=dailyDays(10);
+ document.getElementById('perfectTotal').textContent=total;
+ document.getElementById('perfectDays').textContent=pd+' 天';
+ document.getElementById('perfectBar').style.width=Math.min(100,pd/10*100)+'%';
+ document.getElementById('perfectGoal').textContent=pd>=10?`✅ 已達成「每日 10 次」條件｜目前累計 ${total} 次，繼續衝刺 250 / 300 / 350 次最終獎勵。`:`🔒 尚需 ${10-pd} 天達成每日 10 次｜目前累計 ${total} 次。`;
+
+ document.getElementById('perfectGrid').innerHTML=PERFECT.map(it=>{const done=pd>=10&&total>=it.score;return `<div class="perfect-item ${done?'done':''}"><div class="reward-day">${it.score} 次</div><div class="reward-icon">${it.icon}</div><div class="reward-name">${it.text}</div><div class="season-progress">${done?'✅ 已達成':(pd<10?'每日10次條件未完成':'尚差 '+Math.max(0,it.score-total)+' 次')}</div></div>`}).join('');
+}
+function change(id,n){const d=ensureDay(selectedDate);d.counts[id]=Math.max(0,(d.counts[id]||0)+n);save();render()}
+function setSelectedDate(v){if(!/^\d{4}-\d{2}-\d{2}$/.test(v))return;selectedDate=v;render()}
+function goToday(){selectedDate=localDate();render()}
+function shiftDate(delta){const d=parseDate(selectedDate);d.setDate(d.getDate()+delta);setSelectedDate(`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`)}
+function resetToday(){const today=localDate();selectedDate=today;data.days[today]={counts:{}};TASKS.forEach(t=>data.days[today].counts[t.id]=0);save();render()}
+function saveNames(){data.title=document.getElementById('titleIn').value||'三騎士的征途';data.subtitle=document.getElementById('subIn').value||'遠征任務追蹤器 ⚔️　｜　第1回';save();render()}
+function resetAllProgress(){if(confirm('確定重置全部進度？保留網頁設定但清空所有日期紀錄。')){data.days={};save();render()}}
+function clearAll(){if(confirm('確定清除全部追蹤資料？此操作不能復原。')){localStorage.removeItem(KEY);location.reload()}}
+function exportData(){const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='talesrunner-three-knights-journey.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),500)}
+render();
+</script>
+</body>
+</html>
